@@ -22,9 +22,9 @@ type Client struct {
 	logic Logic
 }
 
-func main() {
-	client := Client{
-		logic: LogicProvider{},
-	}
-	client.logic.process()
-}
+//func main() {
+//	client := Client{
+//		logic: LogicProvider{},
+//	}
+//	client.logic.process()
+//}
