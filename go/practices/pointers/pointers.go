@@ -31,13 +31,14 @@ func update(px *int) {
 func makePointer[T any](t T) *T {
 	return &t
 }
-func main() {
-	product := &Product{name: makePointer("name"), address: "test"}
-	fmt.Println(*product)
-	typeChecker(product)
-	//var g int = 10
-	//failedUpdate(&g)
-	//fmt.Println(g)
-	//update(&g)
-	//fmt.Println(g)
-}
+
+//func main() {
+//	product := &Product{name: makePointer("name"), address: "test"}
+//	fmt.Println(*product)
+//	typeChecker(product)
+//	//var g int = 10
+//	//failedUpdate(&g)
+//	//fmt.Println(g)
+//	//update(&g)
+//	//fmt.Println(g)
+//}
