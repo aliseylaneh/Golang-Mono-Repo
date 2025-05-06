@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 
 func main() {
 	var s []string = []string{"Ali", ""}
@@ -31,4 +34,29 @@ func main() {
 	fmt.Println("Slicing in slice")
 	fmt.Println(c[1:3], cap(c))
 	fmt.Println(c[:4]) // Excluding the index of 4 in c slice.
+	fmt.Println(c[2:]) // Include the index of 2 and slices up from index 2.
+	// --------------
+	// Initialize slice variable in single line.
+	t := []string{"Ali", "Seylaneh", "Senior", "Software Engineer"}
+	fmt.Println(t)
+	// Looping over a collection like slice.
+	for _, value := range t {
+		fmt.Println(value)
+	}
+	// Using slice package utility example.
+	t2 := []string{"Ali", "Seylaneh", "Senior", "Software Engineer"}
+	if slices.Equal(t, t2) { // Equaling is compared by length of slice and elements
+		fmt.Println("T2 and T are equal")
+	}
+	// Multi-dimensional slices
+	twoD := make([][]int, 3)
+	for i := 0; i < 3; i++ {
+		innerLen := i + 1
+		twoD[i] = make([]int, innerLen)
+		for j := 0; j < innerLen; j++ {
+			twoD[i][j] = i + j
+
+		}
+	}
+	fmt.Println("2D: ", twoD)
 }
