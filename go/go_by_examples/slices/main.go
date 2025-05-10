@@ -25,7 +25,7 @@ func main() {
 	fmt.Println(cap(v), len(v))
 	// ----------------
 	c := make([]int, len(v))
-	copy(c, v) // All the attributes of the slice is copied line cap and elements.
+	copy(c, v) // All the attributes of the slice is copied length, cap and elements.
 	fmt.Println(c, cap(c))
 	v[2] = 33
 	fmt.Println(v)
@@ -42,6 +42,9 @@ func main() {
 	// Looping over a collection like slice.
 	for _, value := range t {
 		fmt.Println(value)
+	}
+	for index, value := range t {
+		fmt.Println(index, value)
 	}
 	// Using slice package utility example.
 	t2 := []string{"Ali", "Seylaneh", "Senior", "Software Engineer"}
