@@ -53,6 +53,7 @@ func main() {
 	}
 	// Multi-dimensional slices
 	twoD := make([][]int, 3)
+	fmt.Println(twoD)
 	for i := 0; i < 3; i++ {
 		innerLen := i + 1
 		twoD[i] = make([]int, innerLen)
