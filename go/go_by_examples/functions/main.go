@@ -47,6 +47,15 @@ func eligibleTarget(targetSales []int, dayEarnedSale int) (int, bool) {
 	}
 	return winner, true
 }
+
+// Function which is a closure, means the function can include another function as anonymouse function
+func intSeq() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
+}
 func main() {
 	// Multiple return value function
 	targetSales := []int{1200, 1400, 1550, 1600}
@@ -56,4 +65,12 @@ func main() {
 
 	// Variadic functions
 	variadicFunction(3, 4, "Ali Seylaneh", float32(3.5), 4.6)
+
+	// Closure
+	nextInt := intSeq()
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+
 }
