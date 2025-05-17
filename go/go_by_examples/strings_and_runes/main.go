@@ -17,4 +17,10 @@ func main() {
 	for idx, runeValue := range s {
 		fmt.Printf("%#U starts at %d\n", runeValue, idx)
 	}
+	// Loop over string
+	someString := "Ali Seylaneh"
+	for _, i2 := range someString {
+		fmt.Printf("%v\n", i2)
+	}
+	fmt.Println(utf8.RuneCountInString(someString))
 }
