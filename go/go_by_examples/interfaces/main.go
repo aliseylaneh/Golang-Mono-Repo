@@ -34,9 +34,9 @@ func (c circle) area() float64 {
 
 func printPerim(shape geometry) {
 	if c, ok := shape.(circle); ok {
-		fmt.Printf("shape is %v, perm is: %v\n", c, shape.perim())
+		fmt.Printf("shape is %T, perm is: %v\n", c, shape.perim())
 	} else if c, ok := shape.(rect); ok {
-		fmt.Printf("shape is %v, perm is: %v\n", c, shape.perim())
+		fmt.Printf("shape is %T, perm is: %v\n", c, shape.perim())
 	} else {
 		fmt.Println("No relevant type of geometry is passed for area calculation.")
 	}
