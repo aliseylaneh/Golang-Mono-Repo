@@ -31,9 +31,39 @@ func SliceIndexBinarySearch[S ~[]E, E constraints.Ordered](s S, v E) int {
 	return -1
 }
 
+type List[T any] struct {
+	head, tail *element[T]
+}
+type element[T any] struct {
+	next *element[T]
+	val  T
+}
+
+func (lst *List[T]) Push(v T) {
+	if lst.tail == nil {
+		lst.head = &element[T]{val: v}
+		lst.tail = lst.head
+	} else {
+		lst.tail.next = &element[T]{val: v}
+		lst.tail = lst.tail.next
+	}
+}
+func (lst *List[T]) AllElements() []T {
+	var elements []T
+	for e := lst.head; e != nil; e = e.next {
+		elements = append(elements, e.val)
+	}
+	return elements
+}
 func main() {
 	s := []int{1, 2, 3, 5, 6}
 	v := 5
-	fmt.Println(SlicesIndex(s, v))
+	fmt.Println(SlicesIndex[[]int, int](s, v))
 	fmt.Println(SliceIndexBinarySearch(s, v))
+
+	linkedList := List[string]{}
+	linkedList.Push("Ali")
+	linkedList.Push("Seylaneh")
+	linkedList.Push("Mahan")
+	fmt.Println(linkedList.AllElements())
 }
