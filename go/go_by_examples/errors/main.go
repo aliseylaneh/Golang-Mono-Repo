@@ -8,12 +8,11 @@ import (
 func sqrLessThanEqual(arg int) (int, error) {
 	if arg > 100 {
 		return -1, ErrorHigherThanHundred
-
 	}
 	return arg * arg, nil
 }
 
-// ErrorHigherThanHundred Sentinel error or custom errors
+// ErrorHigherThanHundred Sentinel error
 var ErrorHigherThanHundred = fmt.Errorf("the value is higher than 100")
 var ErrOutOfTea = fmt.Errorf("no more tea available")
 var ErrorPower = fmt.Errorf("can't boil water")
@@ -55,5 +54,13 @@ func main() {
 			continue
 		}
 		fmt.Println("Tea is ready")
+	}
+	_, err = sqrLessThanEqualCustomError(1000)
+	var ae *argError
+	if errors.As(err, &ae) {
+		fmt.Println(ae.arg)
+		fmt.Println(ae.message)
+	} else {
+		fmt.Println("err doesn't match argError")
 	}
 }
