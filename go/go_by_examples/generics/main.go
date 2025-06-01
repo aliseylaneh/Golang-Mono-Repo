@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"slices"
+)
 import constraints "golang.org/x/exp/constraints"
 
 // SlicesIndex This is linear search and include generic type, with time complexity of O(n)
@@ -66,4 +69,16 @@ func main() {
 	linkedList.Push("Seylaneh")
 	linkedList.Push("Mahan")
 	fmt.Println(linkedList.AllElements())
+	// Range over iterators
+	for i := range linkedList.All() {
+		fmt.Println(i)
+	}
+	allElements := slices.Collect(linkedList.All())
+	fmt.Println(allElements)
+	for fib := range genFb() {
+		if fib >= 100 {
+			break
+		}
+		fmt.Println(fib)
+	}
 }
