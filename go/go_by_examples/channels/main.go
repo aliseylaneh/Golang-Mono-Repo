@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // channelReader generic channel reader.
@@ -23,12 +24,25 @@ func pong(channel <-chan string, pongs chan<- string) {
 	msg := <-channel
 	pongs <- msg
 }
+
+// Chanel synchronization example.
+// worker This function is under processing.
+// take a channel to notify another goroutine that this function is done.
+func worker(done chan<- bool) {
+	fmt.Print("working... ")
+	time.Sleep(2 * time.Second)
+	fmt.Println("Done.")
+	done <- true
+}
 func main() {
 	// This is an example of channel directions
-	msg := "New message"
-	pings := make(chan string, 1)
-	pongs := make(chan string, 1)
-	ping(pings, msg)
-	pong(pings, pongs)
-	fmt.Println(<-pongs)
+	//msg := "New message"
+	//pings := make(chan string, 1)
+	//pongs := make(chan string, 1)
+	//ping(pings, msg)
+	//pong(pings, pongs)
+	//fmt.Println(<-pongs)
+	done := make(chan bool, 1)
+	go worker(done)
+	<-done
 }
