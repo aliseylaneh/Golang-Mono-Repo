@@ -1,25 +1,18 @@
 package main
 
-import "fmt"
-
-//func main() {
-//	messages := make(chan string, 2)
-//	go func() {
-//		messages <- "Ping 2"
-//		messages <- "Ping 3"
-//	}()
-//	for _ = range 2 {
-//		fmt.Println(<-messages)
-//	}
-//}
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	messages := make(chan string, 2)
+	messages := make(chan string)
+	go channelReader(messages)
 
-	messages <- "Ping 2"
-	messages <- "Ping 3"
+	messages <- "Ping"
+	time.Sleep(time.Second)
 
-	for _ = range 2 {
-		fmt.Println(<-messages)
-	}
+}
+func channelReader[T any](s chan T) {
+	fmt.Println(<-s)
 }
