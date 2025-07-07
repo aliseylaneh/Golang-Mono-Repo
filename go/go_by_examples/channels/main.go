@@ -60,6 +60,33 @@ func selectPractice() {
 	}
 
 }
+
+func send(channel chan string, message string) {
+	channel <- message
+}
+func signalsReceiver(signals chan bool) {
+	<-signals
+}
+func nonBlockingChannels() {
+	messages := make(chan string)
+	signals := make(chan bool)
+	go send(messages, "Hello Everyone!!")
+	time.Sleep(100 * time.Millisecond)
+	select {
+	case msg := <-messages:
+		fmt.Println("Message received:", msg)
+	default:
+		fmt.Println("No message received.")
+	}
+	go signalsReceiver(signals)
+
+	select {
+	case signals <- true:
+		fmt.Println("Signals sent.")
+	default:
+		fmt.Println("No signal was sent.")
+	}
+}
 func main() {
 	// This is an example of channel directions
 	//msg := "New message"
@@ -71,5 +98,6 @@ func main() {
 	//done := make(chan bool, 1)
 	//go worker(done)
 	//<-done
-	selectPractice()
+	//selectPractice()
+	nonBlockingChannels()
 }
