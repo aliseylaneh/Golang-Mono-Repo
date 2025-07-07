@@ -39,21 +39,26 @@ func selectPractice() {
 	ch2 := make(chan string)
 
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(2 * time.Second)
 		ch1 <- "one"
 	}()
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(2 * time.Second)
 		ch2 <- "two"
 	}()
-	for range 2 {
-		select {
-		case msg1 := <-ch1:
-			fmt.Println("received", msg1)
-		case msg2 := <-ch2:
-			fmt.Println("received", msg2)
-		}
+	select {
+	case msg1 := <-ch1:
+		fmt.Println("received", msg1)
+	case <-time.After(1 * time.Second):
+		fmt.Println("timeout on channel 1")
 	}
+	select {
+	case msg2 := <-ch2:
+		fmt.Println("received", msg2)
+	case <-time.After(3 * time.Second):
+		fmt.Println("timeout on channel 2")
+	}
+
 }
 func main() {
 	// This is an example of channel directions
