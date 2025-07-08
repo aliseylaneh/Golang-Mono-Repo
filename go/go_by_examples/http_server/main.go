@@ -13,8 +13,9 @@ func getHello(w http.ResponseWriter, request *http.Request) {
 	io.WriteString(w, "Hello World")
 }
 func main() {
-	http.HandleFunc("/", getHello)
-	err := http.ListenAndServe(":8000", nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", getHello)
+	err := http.ListenAndServe(":8000", mux)
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Println("Server closed.")
 	} else if err != nil {
