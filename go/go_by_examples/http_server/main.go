@@ -1,9 +1,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 )
 
 func getHello(w http.ResponseWriter, request *http.Request) {
@@ -13,7 +15,10 @@ func getHello(w http.ResponseWriter, request *http.Request) {
 func main() {
 	http.HandleFunc("/", getHello)
 	err := http.ListenAndServe(":8000", nil)
-	if err != nil {
-		fmt.Println(err)
+	if errors.Is(err, http.ErrServerClosed) {
+		fmt.Println("Server closed.")
+	} else if err != nil {
+		fmt.Printf("error starting server:%s\n", err)
+		os.Exit(1)
 	}
 }
